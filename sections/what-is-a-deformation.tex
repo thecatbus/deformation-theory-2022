@@ -1,0 +1,426 @@
+\section{What is a deformation?}\label{section-whats-a-deformation}
+
+We explore how deformation problems naturally arise when considering
+algebro-geometric objects.
+
+\begin{example}
+    \label{example-double-point-1}
+    Consider the affine scheme \(X_0=\Spec k[x]/(x^2)\), the double point. This
+    can be seen as `limiting case' of the scheme \(X_t = \Spec k[x]/(x^2-t)\)
+    for \(t\in k\): if \(t\neq 0\) then \(X_t\) is the reduced scheme with two
+    points. We will eventually show this is the only non-trivial way to deform
+    \(X_0\) as an abstract scheme, and this should agree with our intuition that
+    the only way to deform a double point is to separate its components.
+
+    On the other hand, consider \(X_0\) with its embedding into
+    \(\mathbb{A}^1\) as the double point at \(0\). Deforming \(X_0\) in the
+    ambient space, we have a second family of embedded subschemes \(X'_t\) given
+    by \(\mathbb{V}((x-t)^2) \subset \Spec k[x]\). This corresponds to
+    deforming \(X_0\) by translating it, without changing its intrinsic
+    geometry. This deformation is genuinely distinct from both the trivial
+    deformation (i.e.\ the constant family) and a deformation which separates
+    the points.
+
+    Lastly we can instead consider the \(k[x]\)-module \(M_0 = k[x]/(x^2)\), as
+    a sheaf over \(\mathbb{A}^1\). This is simply the structure sheaf of
+    \(\mathscr{O}_{X_0}\) pushed forward along the inclusion, and the family
+    \(\mathscr{O}_{X'_t}\) can be considered a deformation of \(M_0\)
+    as a module. Another family is given by \(M_t = k^{\oplus 2}\) where \(x\)
+    acts as \((a,b) \mapsto (bt, a)\). Observe that this cannot be realised as
+    the structure sheaf of an embedded deformation of \(X_0\), since
+    \(M_t\) cannot be expressed as a quotient of \(k[x]\) for \(t\neq 0\).
+\end{example}
+
+Thus any structure we can associate multiple deformation problems-- a choice
+which is made based on the broader context of what we are studying. To establish
+a common framework for such problems, we begin by making the three notions of
+deformations seen in \Cref{example-double-point-1} precise in a way that lends
+itself to functorial formulation.
+
+\subsection{Various deformation problems}
+\label{subsec-various-deformation-problems}
+
+We begin by outlining reasonable candidates for what one might call a
+`deformation problem'-- given a structure (a scheme, a sheaf, a module etc)
+\(X\), we wish to find a `nice family' containing \(X\), and if possible
+classify such families up to isomorphism. The way to make this notion of a `nice
+family' precise usually depends on the specific structure we wish to deform and
+the aspects which we wish to preserve.
+
+\subsubsection{Abstract deformations of schemes}
+Fix a \(k\)-scheme \(T\). The category of \(T\)-schemes has objects given by diagrams
+\(X\xrightarrow{\;\pi\;}T\) in \(\Sch/k\). We will often abuse notation and
+write \(X_T\) for this object. For each scheme-theoretic point \(t\rightarrow
+T\), the fiber 
+\[X_t := \pi^{-1}(t) = t\times_T X_T \] 
+is a scheme over \(t\), allowing us to think of \(X_T\) as a family of schemes
+parametrised by \(T\). However for this interpretation to be sensible, we desire
+the fibers to be ``similar''-- this is ensured by requiring the morphism \(\pi\)
+to be flat. Accordingly, define a \textit{\(T\)-family of schemes} is a flat
+morphism \(X_T\xrightarrow{\;\pi\;}T\) of \(k\)-schemes.
+
+An \textit{augmentation} of the \(k\)-scheme \(T\) is the choice of a
+\(k\)-point \(\mathbold{0} \hookrightarrow T\) (called the \textit{special
+point}). Often there will be a natural choice of augmentation-- for instance if
+\(T\) is the spectrum of a local \(k\)-algebra, there is a unique \(k\)-point
+corresponding to the maximal ideal. 
+
+If \(T\) is augmented and \(X_T\) is a \(T\)-scheme, the fiber \(X_\mathbold{0}\)
+over the special point is called the \textit{special fiber}.
+
+\begin{definition}
+    \label{def-defthy-abstractscheme}
+    For \(T,X\in \Sch/k\) such that \(T\) is augmented, a
+    \textit{\(T\)-deformation} of \(X\) is a \(T\)-family
+    \(X_T\rightarrow T\) and an isomorphism \(\varphi: X\rightarrow
+    X_\mathbold{0}\) identifying the special fiber with \(X\).
+\end{definition}
+
+Often we will simply write \(X_T\) for such a deformation, leaving the
+morphism to \(T\) and the isomorphism \(\varphi\) implicit. 
+
+We say the \(T\)-deformations \(X_T\) and \(X'_T\) are isomorphic if there is
+an isomorphism of \(T\)-schemes \(X_T\xrightarrow{\sim} X'_T\) which respects
+the identifications of the special fibers with \(X\).
+
+\subsubsection{Embedded deformations}
+While we deformed schemes abstractly above, we can instead deform them inside an
+ambient space. For a \(k\)-scheme \(X\), a \textit{\(T\)-family of closed
+subschemes in \(X\)} is given by commutative diagram  
+\[\begin{tikzcd}
+    Z_T \arrow[r,"\iota",hook] \arrow[rd,"\pi"'] 
+    & X\times T \arrow[d,"\text{pr}_2"] \\ 
+    & T
+\end{tikzcd}\] 
+such that \(\iota\) is a closed immersion and \(\pi\) is flat. In particular,
+\(Z_T\) is a \(T\)-family such that for any point \(t\hookrightarrow T\) the
+fiber \(Z_t\) is naturally a closed subscheme of \(X\times t\) via the
+inclusion \(\iota\). 
+
+If \(T\) is augmented, note that the special fiber is a closed subscheme of \(X\).
+
+\begin{definition} \label{def-embdef}
+    Let \(T\) be an augmented \(k\)-scheme, and \(Z\xhookrightarrow{\;i\;}X\) a
+    closed immersion in \(\Sch/k\). A \textit{\(T\)-deformation of \(Z\) in
+    \(X\)} is a \(T\)-family \(Z_T\xhookrightarrow{\;\iota\;} X\times T\) 
+    of closed subschemes in \(X\) and an isomorphism \(\varphi: Z\rightarrow
+    Z_\mathbold{0}\) such that \(\iota|_{Z_\mathbold{0}}\circ \varphi = i\) .
+\end{definition}
+
+\subsubsection{Deformations of sheaves} Embedded deformations are nice
+because we have the ambient space to work with-- we are looking for quotients
+\(\mathscr{O}_{Z_T}\) of \(\mathscr{O}_{X\times T}\) which are flat over \(T\),
+and give \(\mathscr{O}_Z\) upon restriction to \(X\). More generally, we can
+consider deformations of coherent sheaves over an augmented \(k\)-scheme \(T\).
+
+\begin{definition} \label{def-defthy-of-sheaf}
+    If \(\mathcal{F}\) is a coherent sheaf on a \(k\)-scheme \(X\), then a
+    \textit{\(T\)-deformation} of \(\mathcal{F}\) is a coherent sheaf
+    \(\mathcal{F}_T\) on \(X\times T\), flat over \(T\), with an isomorphism
+    \(\varphi: \mathcal{F}\rightarrow\mathcal{F}_T|_{X\times \mathbold{0}}\).
+\end{definition}
+
+Observe that embedded \(T\)-deformations of \(Z\hookrightarrow X\) are
+precisely those deformations of the sheaf \(\mathscr{O}_Z\) on \(X\) which can
+be expressed as quotients of the sheaf \(\mathscr{O}_{X\times T}\).
+\Cref{example-double-point-1} exhibits that in most cases there are more
+deformations of the sheaf \(\mathscr{O}_Z\) than there are deformations of the
+associated embedded subscheme. 
+
+\subsection{Functoriality in the parameter space}
+
+A morphism of augmented \(k\)-schemes is a \(k\)-scheme morphism \(T'\rightarrow
+T\) such that the natural diagram 
+\[\begin{tikzcd}
+    T' \arrow[r] & T \\
+    \Spec k \arrow[u] \arrow[r, Rightarrow, no head] & \Spec k \arrow[u]
+\end{tikzcd}\]
+commutes, where the vertical arrows are the augmentation morphisms. This allows
+us to define a category \(\Sch^1/k\) (the category of \(k\)-schemes with one
+marked \(k\)-point), whose objects are augmented \(k\)-schemes and morphisms are
+of the kind described above.
+
+If \(T'\rightarrow T\) is a morphism of augmented \(k\)-schemes, and
+\(X_T\rightarrow T\) is a \(T\)-deformation of \(X\in \Sch/k\), then the
+pullback
+\[ \begin{tikzcd}
+    X_{T'} \arrow[r] \arrow[d] \arrow[dr, phantom, "\square"] & X_T
+    \arrow[d] \\ 
+    T' \arrow[r] & T 
+\end{tikzcd} \]
+gives a \(T'\)-deformation \(X_{T'}\) of \(X\). Writing \(\Def_X(T)\) for the
+set of abstract \(T\)-deformations of \(X\) up to isomorphism, we see that we
+in fact have a functor \((\Sch^1/k)^\text{op}\rightarrow \text{Set}.\)
+
+The pullback construction works analogously for embedded deformations and
+deformations of sheaves.
+
+\subsubsection{Size of the parameter space} 
+Global information carried by deformation families is often largely irrelevant,
+and we mostly care about deformations in an (analytic or infinitesimal)
+neighbourhood of the special point. Thus working with parameter spaces in
+\(\Sch^1_k\) is not optimal, and we work instead with spectra of complete
+(Artinian in the infinitesimal case) local rings.
+
+Write \(\text{cArt}^1_k\) for the category of commutative Artinian local
+\(k\)-algebras with residue field \(k\), and \(\widehat{\text{cArt}}{}^1_k\) for
+the category of complete local \(k\)-algebras with residue field \(k\). It is
+immediate that 
+\[\text{cArt}^1_k \quad \subset \quad \widehat{\text{cArt}}{}^1_k \quad \subset
+\quad (\Sch^1_k)^\text{op}\]
+as full subcategories, where the last inclusion is via \(\Spec\). Then all the
+deformation functors defined in \Cref{subsec-various-deformation-problems} can
+be restricted to functors on \(\text{cArt}^1_k\) instead.
+
+For \(R\in \widehat{\text{cArt}}{}^1_k\), write \(\mathbold{0}_R:
+R\twoheadrightarrow k\) for the augmentation morphism and \(\mathfrak{m}_R\) for
+the maximal ideal.
+
+\subsection{ Deformation theory of a point}
+\label{subsec-defthy-of-a-point}
+As an extended example of the theory developed above, we study the deformation
+theory of a closed point in a scheme. Given a \(k\)-scheme \(X\) with a
+\(k\)-point \(x\), our intuition suggests that the infinitesimal deformation
+theory of structures associated to \(x\) should only depend on an analytic
+neighbourhood of \(x\) in \(X\). We make this notion precise by showing that the
+functor \(\Def_{x\hookrightarrow X}\) is naturally isomorphic to
+\(\text{Hom}(\widehat{\mathscr{O}}_{X,x}, -)\). 
+
+First, observe that we can focus on affine schemes in light of the following
+lemma.
+
+\begin{lemma}\label{lemma-defthy-is-affine}
+    If \(U\subset X\) is an open subscheme containing \(x\), then for any \(R\in
+    \text{cArt}{}^1_k\) the natural map 
+    \[\Def_{\mathscr{O}_{X,x}}(R) \rightarrow \Def_{\mathscr{O}_{U,x}}(R)\]
+    (given by pulling back families) is a bijection. Thus the deformation theory
+    of the skyscraper sheaf \(\mathscr{O}_{X,x}\) only depends on a
+    neighbourhood of \(x\).
+    \begin{proof}
+        Observe that the scheme \(X\times \Spec R\) has the same
+        underlying topological space as \(X\), but with structure sheaf
+        \(\mathscr{O}_X\otimes R\). An \(R\)-deformation of
+        \(\mathscr{O}_{X,x}\) is given by a \(\mathscr{O}_X\otimes
+        R\)-module \(\mathcal{F}\) such that each stalk \(\mathcal{F}_p\) is a
+        flat \(R\)-module satisfying \(\mathcal{F}_p\otimes_R k \cong
+        (\mathscr{O}_{X,x})_p\). But flat modules over Artinian local rings are
+        free, so we must have that \(\mathcal{F}\) is a skyscraper sheaf at
+        \(x\). Thus the restriction map 
+        \begin{align*}
+            \Def_{\mathscr{O}_{X,x}}(R)&\rightarrow \Def_{\mathscr{O}_{U,x}}(R)
+            \\ 
+            \mathcal{F}&\mapsto \mathcal{F}|_U
+        \end{align*}
+        admits an inverse which is extension by zero on \(X\setminus U\).
+    \end{proof}
+\end{lemma}
+
+This allows us to assume \(X\) is an affine scheme \(\Spec A\) for the rest of
+this discussion, and the point \(x\) is given by a surjection
+\(A\twoheadrightarrow k\) which we shall also call \(x\). Write
+\(\mathfrak{m}_x\) for the kernel of this map. 
+
+From the above discussion, any \(R\)-deformation of \(\mathscr{O}_{X,x}\) is
+given by an \(A\)-module structure on the free \(R\)-module of rank \(1\) such
+that the diagram below commutes.  
+\begin{equation}\label{diag-deformation-of-point} \tag{\(\ast\)}
+    \begin{tikzcd} 
+        k & R \arrow[l,"\mathbold{0}_R"', twoheadrightarrow] \\ A\arrow[r]
+        \arrow[u, "x", twoheadrightarrow] & A\otimes R \arrow[u] 
+    \end{tikzcd} 
+\end{equation} 
+Here \(A\otimes R \rightarrow R\) is the map of \(A,R\)-bimodules given by
+\(a\otimes r \mapsto ar\). Observe that the image of \(A\otimes R \rightarrow
+R\) (which is an \(R\)-submodule of \(R\), i.e.\ an ideal) is not contained in
+\(\mathfrak{m}_R\). Thus the map \(A\otimes R \rightarrow R\) must be
+surjective, and the kernel is an ideal so we have a closed immersion \(\Spec R
+\hookrightarrow X\times \Spec R\) which sends the special point to \(x\). This
+is precisely an embedded deformation of \(x\hookrightarrow X\), and it is
+immediate that all embedded deformations must arise in this way. Thus the
+deformation theory of a point in \(X\) coincides with the deformation theory of
+its skyscraper sheaf.
+
+We will now show that this deformation theory only depends on the completion
+\(\widehat{A}_{\mathfrak{m}_x}\).
+
+\begin{proposition}\label{prop-defthy-of-a-point}
+    Let \(X\) be a \(k\)-scheme with a \(k\)-point \(x\). Then
+    for any \(R\in \text{cArt}{}^1_k\), the following sets are natural
+    bijection:
+    \begin{enumerate}[(i)] 
+        \item the set of embedded \(R\)-deformations of \(x\) in \(X\),
+        \item the set of \(R\)-deformations of the skyscraper sheaf
+            \(\mathscr{O}_{X,x}\),
+        \item the set of morphisms \(\Spec R\rightarrow X\) that send the
+            special point \(\mathbold{0}_R\hookrightarrow \Spec R\) to \(x\),
+            and 
+        \item \(\Hom(\widehat{\mathscr{O}}_{X,x},R)\), the set of local
+            \(k\)-algebra homomorphisms from the completion of the local ring of
+            \(\mathscr{O}_{X,x}\) to \(R\).
+    \end{enumerate}
+    \begin{proof}
+        We work in the affine case. The bijection
+        \(\text{(i)}\leftrightarrow\text{(ii)}\) was shown in the discussion
+        above. 
+
+        Given a \(R\)-deformation of \(\mathscr{O}_{X,x}\), we can again
+        construct the diagram (\ref{diag-deformation-of-point}). The composite
+        map \(A\rightarrow R\) gives a morphism \(\Spec R \rightarrow X\) which
+        sends the special point to \(x\). On the other hand, given a map
+        \(A\rightarrow R\) such that the composition \(A\rightarrow R
+        \twoheadrightarrow k\) is \(x\), we can factor the map \(A\rightarrow
+        R\) as \(A\hookrightarrow A\otimes R \rightarrow R\) to get the
+        commutative diagram of the form above, giving an \(R\)-deformation of
+        \(\mathscr{O}_{X,x}\). This is the required bijection
+        \(\text{(ii)}\leftrightarrow \text{(iii)}\).
+
+        Lastly, if \(A\rightarrow R\) is a map such that the composition
+        \(A\rightarrow R \twoheadrightarrow k\) is \(x\), then any element of
+        \(A\setminus \mathfrak{m}_A\) must land in \(R\setminus \mathfrak{m}_R\)
+        and thus has an invertible image. This gives an induced map
+        \(A_{\mathfrak{m}_x}\rightarrow R\). Since \(R\) is artinian, the map
+        factors through \(A_{\mathfrak{m}_x}/\mathfrak{m}_x^n\rightarrow R\) for
+        some \(n\), giving an induced map
+        \(\widehat{A}_{\mathfrak{m}_x}\rightarrow R\). Conversely, a map
+        \(\widehat{A}_{\mathfrak{m}_x}\rightarrow R\) must factor through 
+        \(A_{\mathfrak{m}_x}/\mathfrak{m}_x^n \cong
+        \widehat{A}_{\mathfrak{m}_x}/\mathfrak{m}_x^n\rightarrow R\) for some
+        \(n\). This gives the required map \(A\rightarrow R\), and the bijection
+        \(\text{(iii)}\leftrightarrow \text{(iv)}\).
+    \end{proof}
+\end{proposition}
+
+\subsubsection{Prorepresentability} In most cases the completed local ring
+\(\widehat{\mathscr{O}}_{X,x}\) is not Artinian, so the functor
+\(\Def_{x\hookrightarrow X}\) is not representable.  However, we do have
+\(\widehat{\mathscr{O}}_{X,x}\in \widehat{\text{cArt}}{}^1_k \), so that 
+\[\Def_{x\hookrightarrow X}(R) = \lim_{\longleftarrow}
+\Hom(\widehat{\mathscr{O}}_{X,x}/\mathfrak{m}_x^n,
+R),\]
+where \(\mathfrak{m}_x\subset \widehat{\mathscr{O}}_{X,x}\) is the maximal
+ideal. The inverse system \((\widehat{\mathscr{O}}_{X,x}/\mathfrak{m}_x^n)_{n\in
+\mathbb{N}}\) does lie in \(\text{cArt}^1_k\), and we say the deformation
+functor is \textit{prorepresented} by \(\widehat{\mathscr{O}}_{X,x}\). 
+
+Given a category \(\mathbf{C}\) with procategory \(\widehat{\mathbf{C}}\) (i.e.\
+\(\mathbf{C}\) is a full subcategory of \(\mathbf{\widehat{C}}\) and every object of
+\(\widehat{\mathbf{C}}\) is the limit of some inverse system in \(\mathbf{C}\)),
+we can define the notion of prorepresentability of functors as above-- say a
+functor \(F: \mathbf{C}\rightarrow \text{Set}\) is prorepresented by
+\(X=\underset{\leftarrow}{\lim}X_n\) if there are natural bijections \[F(Y) \cong
+\lim_{\longleftarrow}\Hom(X_n,Y).\]  
+Using Yoneda's lemma, we can show that the prorepresenting object is unique if it
+exists. 
+
+\subsection{Deformations as local moduli}
+Recall a \textit{moduli functor} is a functor \((\Sch_k)^\text{op}\rightarrow
+\text{Set}\) which assigns to each \(k\)-scheme \(T\) the set of `families of
+objects over \(T\) up to equivalence'. Every \(k\)-scheme \(X\) determines a
+moduli functor \(\text{Mor}(-,X)\). If a moduli functor \(F\) is naturally
+isomorphic to \(\text{Mor}(-,X)\) for some \(X\in \Sch_k\), we say \(X\) is the
+\textit{(fine) moduli space} associated to \(F\). By Yoneda's lemma, the moduli
+space is unique up to unique isomorphism whenever it exists. 
+
+Note that moduli functors are completely determined by their restriction to the
+full subcategory of affine schemes \((\text{AffSch}_k)^\text{op}\subset
+(\Sch_k)^\text{op}\). But this is equivalent to the category of commutative
+\(k\)-algebras, so we can think of moduli functors as functors 
+\(\text{cAlg}_k\rightarrow \text{Set}.\)  
+
+Given a reasonable moduli functor \(F: \text{cAlg}_k \rightarrow \text{Set}\)
+and an object \(Z\in F(k)\), there is an associated deformation problem given by 
+\begin{align*}
+    \Def_Z: \text{cArt}^1_k &\rightarrow \text{Set} \\ 
+    R &\mapsto \{Z_R\in F(R) \;|\; F(\mathbold{0}_R)(Z_R)=Z \}.
+\end{align*}
+If the functor \(F\) is represented by the moduli space \(X\), then by
+\Cref{prop-defthy-of-a-point} we see that the deformation functor \(\Def_X\)
+gives precisely the embedded deformations of the \(k\)-point in \(X\)
+corresponding to \(Z\). Then, for example, we can read off various local
+properties of \(X\) near this point (the dimension, reducedness, the completed
+local ring etc.) by simply examining the deformation functor. Indeed this is
+one of the motivations for studying deformation theory-- even if a certain moduli
+space exists as scheme it is typically very hard to construct, but deformation
+theory allows us to study its local properties nonetheless. In cases where a
+moduli space doesn't exist, deformation theory provides some insight into the
+reasons why.
+
+\begin{example} 
+    The Hilbert functor of closed subschemes in a \(k\)-scheme \(X\) is given on
+    objects of \(\Sch/k\) by 
+    \[\text{Hilb}_{X/k}(T) = \{\text{\(T\)-families of closed subschemes in
+    \(X\)}\},\] 
+    and acts on morphisms by pulling back families. By a theorem of
+    Grothendieck, this functor is representable and the moduli space
+    \(\text{\underline{Hilb}}_{X/k}\) is a projective \(k\)-scheme. The
+    \(k\)-points of \(\text{\underline{Hilb}}_{X/k}\) correspond to closed
+    subschemes of \(X\).  Fix such a \(k\)-point \(p\), corresponding to
+    \(Z\hookrightarrow X\). The associated deformation functor is given by 
+    \[\Def_{Z\hookrightarrow X}(R)=\{\text{\(R\)-deformations of \(Z\) in
+    \(X\)}\}.\]
+\end{example}
+
+% Any \((R, \mathfrak{m}_R)\in \widehat{\text{cArt}}{}^1/k\) can be seen as the
+% limit of an inverse system in \(\text{cArt}^1/k\), as
+% \[R\cong \lim_{\longleftarrow} R/\mathfrak{m}_R^n.\]
+% Thus a functor \(F: \text{cArt}^1/k \rightarrow \text{Set}\) can be extended to
+% \(\widehat{\text{cArt}}{}^1/k\) via 
+% \[\hat{F}(R) = \lim_{\longleftarrow} F(R/\mathfrak{m}_R^n).\]
+% We say \(\hat{F}(R)\) is the set of \textit{formal families} of \(F\) over
+% \(R\): an element of \(\hat{F}(R)\) is given by a sequence \((\xi_1,\xi_2,...)\)
+% such that \(\xi_n\in F(R/\mathfrak{m}_R^n)\), and \(\xi_n \mapsto \xi_{n+1}\)
+% under the map induced by \(R/\mathfrak{m}_R^n \twoheadrightarrow
+% R/\mathfrak{m}_R^{n+1}\). Note that for a functor
+% \(F:\widehat{\text{cArt}}{}^1/k\rightarrow \text{Set}\) and a complete
+% \(k\)-algebra \(R\) there is a natural map \(F(R)\rightarrow \hat{F}(R)\), but
+% this generally is neither injective nor surjective.
+% 
+% \subsection{Deformation functors}
+% 
+% We can try to understand the various notions of deformations on equal footing,
+% as functors \(\text{cArt}^1/k \rightarrow \text{Set}\). We now outline
+% properties which characterise such deformation functors. 
+% 
+% \textbf{Locality.} Say a functor \(F: \text{cArt}^1/k\rightarrow \text{Set}\) is
+% \textit{local} if it satisfies
+% \[\label{H0} \tag{H\(0\)} F(k)\text{ is the singleton set}.\] 
+% For deformation problems, the unique element in this set shall be the structure
+% we wish to deform. 
+% 
+% \textbf{Formal smoothness.} A natural transformation \(F\rightarrow G\)
+% of local functors is \textit{smooth} if for every surjection
+% \(S\twoheadrightarrow R\) in \(\text{cArt}^1/k\), the natural map 
+% \[F(S) \rightarrow G(S)\times_{G(R)}F(R)\]
+% is surjective. In words, we require that for any \(\xi\in G(S)\), if its image
+% \(\bar\xi \in G(R)\) has a lift under the map \(F(R)\rightarrow G(R)\), then
+% \(\xi\) has a compatible lift under \(F(S)\rightarrow G(S)\). Thus this property
+% should be considered parallel to the infinitesimal lifting property of smooth
+% morphisms of schemes, which is also called formal smoothness.
+% 
+% 
+% 
+% \section{Deformation functors}
+%  To motivate the definition, 
+% \textbf{Notation.} Write \(\text{cArt}^1_k\) for the full subcategory of
+% Artinian local algebras in \(\text{cAlg}/k\). The object \(k\) is both initial
+% and final in this category, so any \(R\in \text{cArt}^1_k\) is canonically
+% augmented-- we write \(\mathbold{0}_R:R\twoheadrightarrow k\) for the augmentation
+% morphism, and \(\bar{R}:= \ker(\mathbold{0}_R)\) for the maximal ideal.
+% 
+% 
+% Thus deformation theory provides a lens to study local properties of moduli
+% spaces. Accordingly, we shall define various properties desirable in a
+% deformation functor.
+% 
+% 
+% \textbf{Gluing over small extensions.}
+% 
+% \textbf{Dimension.} Write \(D:=k(\epsilon)/(\epsilon^2)\) for the ring of dual
+% numbers. If \(X\) is a \(k\)-scheme, then a morphism \(\Spec D \rightarrow X\)
+% is given by a \(k\)-point \(x\in X\) and a tangent vector \(v\in T_xX\).
+% 
+% \textbf{Smoothness.}
+% 
+
+
+

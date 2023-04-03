@@ -1,0 +1,651 @@
+\section{Deformations of affine schemes}
+\label{section-affine-deformation}
+
+In this section we study the deformation theory of affine \(k\)-schemes
+(equivalently \(k\)-algebras) as explicitly as possible-- first in an
+embedded setting, and then as abstract schemes.  
+
+\subsubsection{First-order deformations} If \(\Def: \text{cArt}^1_k \rightarrow
+\text{Set}\) is any deformation functor, we say its \textit{tangent space} is
+given by the set \(\Def(k[\epsilon]/(\epsilon^2)\). Here
+\(k[\epsilon]/(\epsilon^2)\) is the ring of \textit{dual numbers}. We say each
+element of the tangent space is a \textit{first-order} deformation. Any \(R\in
+\text{cArt}^1_k\) admits surjections onto \(k[\epsilon]/(\epsilon^2)\), so every
+\(R\)-deformation has to be the lift of some first-order deformation. Thus
+studying first-order deformations is a step towards understanding deformations
+over other rings, and that is the aim of this section.
+
+All algebras considered in this section will be commutative. Abusing notation,
+we will write \(k[\epsilon]\) for the ring of dual numbers and
+\(R[\epsilon]=R\otimes_k k[\epsilon]\) for any \(k\)-algebra \(R\), leaving it
+implicit that \(\epsilon^2=0\). Moreover, for this section all deformations will
+be over \(k[\epsilon]\) so we will omit the term `first-order', referring to
+them simply as \textit{deformations}. 
+
+\begin{remark}
+    The terminology `tangent space' comes from the following observation-- a
+    \(k\)-scheme morphism \(\Spec k[\epsilon]\rightarrow X\)
+    (i.e.\ a \(k[\epsilon]\)-point in \(X\)) is given by a
+    \(k\)-point \(x\in X\) and a vector \(\theta \in T_x(X)\) in the tangent
+    space of \(X\) at \(x\). In particular if \(X\) is the moduli space for a
+    moduli functor \(F\), and \(\Def_Z\) is the deformation functor associated
+    to \(Z\in F(k)\), then \(\Def_Z(k[\epsilon])\) is precisely the
+    tangent space to \(X\) at the point corresponding to \(Z\).
+\end{remark}
+
+We have the following characterisation of flatness for modules over
+$k[\epsilon]$, which we will use repeatedly:
+\begin{lemma} 
+    \label{flatness} 
+    Let $M$ be a $k[\epsilon]$-module. Then $M$ is flat if and only if tensoring
+    the exact sequence 
+    \[0\rightarrow k \xrightarrow{\;\epsilon\;} k[\epsilon] \longrightarrow k
+    \rightarrow 0\]
+    with \(M\) preserves exactness, where the second non-zero map is the
+    quotient by $(\epsilon)$.  
+    \begin{proof} 
+        A well-known criterion for flatness \cite[see for example][proposition
+        6.1]{eisen} is that $M$ is flat if and only if $\text{Tor}_1^R(M,R/I)=0$
+        for all finitely generated ideals $I\subset R$, for any ring $R$. When
+        $R=k[\epsilon]$, the only non-trivial ideal is $I=(\epsilon)$, and
+        $R/I\cong k$. Then since 
+        \[0 \to M\otimes_{k[\epsilon]}k\to M\to
+        M\otimes_{k[\epsilon]}k\to0 \] 
+        is exact by hypothesis, we have $\text{Tor}_1^R(M,k)=0$ and $M$ is flat.  
+    \end{proof}
+\end{lemma}
+
+\subsection{Embedded deformations}
+Fix an ambient scheme \(X=\Spec S\), then a closed subscheme \(Y=\Spec R\) is
+determined by a surjection \(S\twoheadrightarrow R\) of \(k\)-algebras. In this
+setting, we can rephrase \Cref{def-embdef} as follows.
+
+\begin{definition} 
+    Suppose we have a surjection $S\to R$ of $k$-algebras with kernel $I$. An
+    \textit{embedded (first-order) deformation} of $R$ in $S$ is an ideal
+    $\t{I}\subset S[\epsilon]$ such that $\wt{R}=S[\epsilon]/\t{I}$ is flat over
+    $k[\epsilon]$, and such that the map $S[\epsilon]\to S$ carries $\t{I}$ onto
+    $I$. 
+\end{definition}
+
+In fact over \(k[\epsilon]\), embedded deformations of \(S\twoheadrightarrow R\)
+are equivalent to deformations of the ideal \(I\) in a sense that we make
+precise below, and we will use the two notions interchangeably. 
+
+\begin{lemma}
+    The following are equivalent.
+    \begin{enumerate}
+        \item \(\t{I}\subset S[\epsilon]\) is an ideal that is flat over
+            \(k[\epsilon]\), and the isomorphism
+            \(S[\epsilon]\otimes_{k[\epsilon]} k \cong S\) restricts to an isomorphism
+            \(\t{I}\otimes_{k[\epsilon]} k\cong I\).
+        \item \(S[\epsilon]/\t{I}\) is an embedded deformation of
+            \(S\twoheadrightarrow R=S/I\).
+    \end{enumerate}
+    \begin{proof}
+        (\(1.\Rightarrow 2.\)) Tensoring with $k[\epsilon]/(\epsilon)$ takes
+        $S[\epsilon]\to S$ and $\t{I}\to I$, so we get a map
+        $S[\epsilon]/\t{I}\to S/I\cong R$ such that
+        $(S[\epsilon]/\t{I})\otimes_{k[\epsilon]}k\cong R$. To prove flatness of
+        $S[\epsilon]/\t{I}$ over $k[\epsilon]$, we consider the following
+        nine-term commutative diagram: 
+        \[\begin{tikzcd} 
+        & 0 & 0 & 0 \\ 
+            0 & {I} & {\t{I}} & I & 0 \\ 
+            0 & {S} & {S[\epsilon]} & S & 0 \\ 
+            0 & {S/I} & {S[\epsilon]/\t{I}} & R & 0 \\ 
+              & 0 & 0 & 0 
+              \arrow[from=2-1, to=2-2] 
+              \arrow["\epsilon", from=2-2, to=2-3]
+              \arrow["\epsilon\mapsto0", from=2-3, to=2-4]
+	          \arrow[from=2-3, to=2-4]
+	          \arrow[from=2-4, to=2-5]
+	          \arrow[from=3-1, to=3-2]
+	          \arrow["\epsilon", from=3-2, to=3-3]
+	          \arrow["\epsilon\mapsto0", from=3-3, to=3-4]
+	          \arrow[from=3-4, to=3-5]
+	          \arrow[from=4-1, to=4-2]
+	          \arrow["\epsilon", from=4-2, to=4-3]
+	          \arrow["\epsilon\mapsto0", from=4-3, to=4-4]
+	          \arrow[from=4-4, to=4-5]
+	          \arrow[from=1-2, to=2-2]
+	          \arrow[from=2-2, to=3-2]
+	          \arrow[from=3-2, to=4-2]
+	          \arrow[from=4-2, to=5-2]
+	          \arrow[from=1-3, to=2-3]
+	          \arrow[from=2-3, to=3-3]
+	          \arrow[from=3-3, to=4-3]
+	          \arrow[from=4-3, to=5-3]
+	          \arrow[from=1-4, to=2-4]
+	          \arrow[from=2-4, to=3-4]
+	          \arrow[from=3-4, to=4-4]
+	          \arrow[from=4-4, to=5-4] 
+        \end{tikzcd}\] 
+        Clearly the columns are exact, and the middle row is exact by flatness
+        of \(S\) over \(k\). The top row is right-exact a priori, as we get it
+        by tensoring the exact sequence 
+        \[0\rightarrow k \xrightarrow{\;\epsilon\;} k[\epsilon] \longrightarrow
+        k \rightarrow 0\]
+        with $\t{I}$. But it is also left exact, because if $\epsilon x=0$ for
+        some $x\in I$, then since $\epsilon x\in S[\epsilon]$, we must have
+        $x=0$. Thus by the nine-lemma, the bottom row is exact, so that
+        $S[\epsilon]/\t{I}$ is flat over $k[\epsilon]$ by \Cref{flatness}.
+
+        The proof of \((2.\Rightarrow 1.)\) is analogous, using the exactness of
+        the bottom row to deduce the exactness of the top row.
+    \end{proof}
+\end{lemma}
+
+The following result gives a useful classification of embedded deformations.
+
+\begin{theorem} \label{embdef} 
+    The embedded deformations of $R$ in $S$ are in natural one-to-one correspondence
+    with the set $\Hom_S(I,R)$ of \(S\)-module homomorphisms, with the trivial
+    embedded deformation corresponding to the zero map.  
+    \begin{proof} 
+        Suppose we have an $S$-module homomorphism $\phi:I\to R$. Then define an
+        ideal $I_\phi\subset S[\epsilon]$ by 
+        \[I_\phi=\bigg\{x+\epsilon y\,\bigg|\,x\in I,y\in S,\phi(x)=y\text{ mod
+        }I\bigg\}\] 
+        $I_\phi$ is clearly an ideal, as for all $x+\epsilon y\in
+        I_\phi$ and $a+\epsilon b\in S$, we have that $( x+\epsilon
+        y)(a+\epsilon b)=xa+\epsilon(xb+ay)$. Then since $\phi(x)=y\in R$, we
+        have $\phi(xa)=a\phi(x)=ay=ay+xb$ in $R$, so $( x+\epsilon y)(a+\epsilon
+        b)\in I_\phi$.  
+
+        Clearly the map $S[\epsilon]\to S$ given by dividing out by $\epsilon S$
+        sends $I_\phi$ to $I$. It remains to show that $S[\epsilon]/I_\phi$ is
+        flat over $k[\epsilon]$. For this, just replace $\t{I}$ with $I_\phi$ in
+        the nine-term commutative diagram on the previous page, and then
+        flatness follows by identical reasoning. Note that the zero map
+        $\phi=0\in\hom{S}{I}{R}$ gives the ideal $I\oplus\epsilon I$, which is
+        the trivial embedded deformation.  
+
+        Conversely, suppose we have an embedded deformation $\t{I}\subset
+        S[\epsilon]$. To define our $I\to R$, take any $x\in I$ and lift to an
+        element of $\t{I}$. Since $S[\epsilon]\cong S\oplus S\epsilon$, and we
+        can write this lift as $x+\epsilon y$ for some $y\in S$. This lift is
+        not unique, but differs by an element of $I$: if $x+\epsilon
+        y,x+\epsilon y'$ are two lifts, then $\epsilon (y-y')\in \epsilon I$.
+        Replacing $I_\phi$ with $\t{I}$ in the previous nine-term commutative
+        diagram, we see that since $S[\epsilon]/\t{I}$ is flat over
+        $k[\epsilon]$, 
+        \[0\longrightarrow I\longrightarrow \t{I}\longrightarrow I\longrightarrow0\] 
+        is exact, so that $y-y'\in I$. Thus, the lift $y$ is unique upto an
+        element of $I$, giving a well-defined $S$-homomorphism $I\to R$. Note
+        that the trivial deformation $I[\epsilon]=I\oplus I\epsilon$ gives the 0
+        element in $\hom{S}{I}{R}$, as for any $x\in I$ and lift $x+\epsilon y$,
+        we have that $y\in I$, so is zero in $R$.  
+
+        It remains to show that these two correspondences are inverse to one another. So
+        given an $S$-homomorphism $\phi:I\to R$, we get an embedded deformation
+        $I_\phi$. Then the element of $\Hom_{S}(I,R)$ induced by $I_\phi$ is
+        given as follows: fix $x\in I$, then choose any lift $x+\epsilon y\in
+        I_\phi$ for some $y\in S$. The induced map is then $x\mapsto y\in R$,
+        which is equal to $\phi(x)$. Thus, the homomorphism induced by $I_\phi$
+        is the same as $\phi$.  
+
+        Conversely if we have an embedded deformation $S[\epsilon]/\t{I}$, then
+        let $\phi:I\to R$ be the corresponding homomorphism. We claim that
+        $\t{I}=I_\phi$. Indeed if $x+\epsilon y\in\t{I}$, then $x\in I$ and by
+        the definition of $\phi$ we have that $\phi(x)=y+I$, so that $x+\epsilon
+        y\in I_\phi$. On the other hand if $x+\epsilon y\in I_\phi$, then
+        $\phi(x)=y +I$, so that $x+\epsilon y\in \t{I}$.  
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    In fact, any map \(I\rightarrow R\) must factor through the quotient
+    \(I\twoheadrightarrow I/I^2\), giving us natural isomorphisms
+    \begin{equation} 
+        \tag{\(\dagger\)} \label{dagger} \Hom_S(I, R) \cong \Hom_S(I/I^2,
+        R)\cong \Hom_R(I/I^2, R).  
+    \end{equation} 
+    This admits the following geometric interpretation-- whenever
+    \(Y\hookrightarrow X\) is a closed subscheme defined by a sheaf of ideals
+    \(\mathscr{I}\subset \mathscr{O}_X\), we can define the \textit{normal
+    sheaf} of \(Y\) in \(X\) as \[\mathscr{N}_{Y/X} :=
+    \sheafHom(\mathscr{I}/\mathscr{I}^2, \mathscr{O}_Y).\] In reasonable cases
+    (eg.\ when \(Y\) is a local complete intersection in \(X\)), this is a
+    vector bundle (the normal bundle). Then \Cref{embdef} along with
+    \eqref{dagger} says that (in the affine case) embedded deformations of
+    \(Y\hookrightarrow X\) are given by global sections of
+    \(\mathscr{N}_{Y/X}\).  Thus to deform \(Y\) in \(X\), we must `perturb it
+    in normal directions'.  
+\end{remark}
+
+Deformations in codimension \(1\) have a particularly nice characterisation--
+observe that if \(f\in S\) is not a zero-divisor then the ideal \((f)\) is
+isomorphic to \(S\) as an \(S\)-module, and hence deformations of
+\(S\twoheadrightarrow S/(f)=R\) are in bijection with elements of \(R\).
+Moreover, the deformations of principal ideals can be explicitly given by
+choosing suitable lifts of elements in \(R\) as follows.
+
+\begin{corollary} \label{principal} 
+    Suppose $I\subset S$ is a principal ideal with generator
+    \(f\). Then the embedded deformation of \(S\twoheadrightarrow S/I=R\)
+    corresponding to \(\phi\in \Hom_S(I,R)\) is given by principal ideal
+    \((f+\epsilon f')\subset S[\epsilon]\), where $f'\in S$ is an element such
+    that $\phi(f)=f'\mod I$.     
+    \begin{proof} 
+        In the notation of \Cref{embdef}, if $\phi(f)=f'$ in $R$ then
+        $(f+\epsilon f')\subseteq I_\phi$.  To show equality holds, suppose
+        $x+\epsilon y\in I_\phi$. Then $x=\alpha f$ for some $\alpha \in S$, and
+        $\alpha\phi(f)=y\in I$. Thus, $y=\alpha\phi(f)+\beta f$ for some $f\in
+        S$, so that 
+        \begin{align*} 
+            x+\epsilon y&=\alpha f+\epsilon(\alpha\phi(f)+\beta f) \\ 
+                        &=(\alpha+\epsilon\beta) f +\epsilon\alpha\phi(f) \\ 
+                        &=(\alpha+\epsilon\beta)(f+\epsilon\phi(f)).  
+        \end{align*} 
+        Then since $f+\epsilon\phi(f)\in (f+\epsilon f')$, we have that
+        $x+\epsilon y\in (f+\epsilon f')$.  
+    \end{proof}
+\end{corollary}
+
+Using \Cref{embdef} and \Cref{principal}, we can now compute many examples of
+embedded deformations. 
+
+\begin{example}[Closed subschemes of \(\mathbb{A}^1_k\)] 
+    \label{n points} 
+    The ring $S=k[x]$ is a principal ideal domain, so any proper ideal
+    $I$ is generated by some polynomial \(f\) of degree \(n\geq 0\). Writing $R=S/I$,
+    we see that the closed subscheme $\Spec R\hookrightarrow \Spec S$ consists
+    of $n$ points on $\mathbb{A}^1_k$, counted with multiplicity. Then by \Cref{embdef},
+    the space of embedded deformations is in bijection with $k[x]/(f)$. But this
+    is just the set of all polynomials in $k[x]$ of degree less than $n$, so by
+    \Cref{principal} all the embedded deformations of $R$ are of the form 
+    \[k[\epsilon,x]/(f+\epsilon (a_{n-1}x^{n-1}+\ldots+a_1x+a_0))\] 
+    for $a_0,\ldots,a_{n-1}\in k$. This naturally has the structure of an
+    \(n\)-dimensional vector space, thus showing that the Hilbert scheme of \(n\)
+    points in \(\mathbb{A}^1_k\) is \(n\)-dimensional.
+\end{example}
+
+\subsection{Abstract deformations}
+
+Again, \Cref{def-defthy-abstractscheme} can be rephrased for first-order
+deformations of algebras as follows. 
+
+\begin{definition} \label{def-defalgebra}
+    An \textit{abstract deformation} of a \(k\)-algebra $R$ is a flat
+    $k[\epsilon]$-algebra $\wt{R}$ together with a surjective $k$-algebra
+    homomorphism $\beta:\wt{R}\to R$ such that the induced map 
+    \[\wt{R}\otimes_{k[\epsilon]}k\longrightarrow R\]
+    is an isomorphism.
+\end{definition}
+
+Two such deformations $\beta:\wt{R}\to R$ and $\beta':\wt{R}'\to R$ are equivalent if
+there is $k[\epsilon]$-algebra homomorphism $\alpha:\wt{R}\to\wt{R}'$ such that
+the functor $-\otimes_{k[\epsilon]}k$ takes $\alpha$ to $\id{R}$. More
+precisely, there is a commutative diagram of $k$-algebras:
+\[\begin{tikzcd}
+    \wt{R}\otimes_{k[\epsilon]}k \arrow[r,"\alpha\otimes \text{id}"] \arrow[d,"\cong"] &
+    \wt{R}'\otimes_{k[\epsilon]}k \arrow[d,"\cong"] \\
+    R \arrow[r, Rightarrow, no head] & R
+\end{tikzcd}\]
+
+It is immediate that \(\alpha:\wt{R}\rightarrow \wt{R}'\) is an isomorphism by
+applying the five lemma to the following diagram with exact rows.  
+\[\begin{tikzcd} 
+    0 & R\arrow[d, Rightarrow, no head] & {\widetilde{R}} & R\arrow[d,
+    Rightarrow, no head] & 0 \\ 
+    0 & R & {\widetilde{R}'} & R & 0 
+    \arrow[from=1-1, to=1-2] 
+    \arrow["\epsilon", from=1-2, to=1-3]
+    \arrow["\beta", from=1-3, to=1-4]
+    \arrow[from=1-4, to=1-5]
+    \arrow[from=2-1, to=2-2]
+    \arrow["\epsilon", from=2-2, to=2-3]
+    \arrow["\beta'", from=2-3, to=2-4]
+    \arrow[from=2-4, to=2-5]
+    \arrow["\alpha", from=1-3, to=2-3] 
+\end{tikzcd}\] 
+
+ The \textit{trivial deformation} of a $k$-algebra $R$ is
+ $R\otimes_kk[\epsilon]\cong R[\epsilon]$. (To see this is indeed a deformation,
+ observe that flatness is preserved by base change and $R$ is automatically flat
+ over $k$, so $R[\epsilon]$ is flat over $k[\epsilon]$.
+ The equality \((R\otimes_kk[\epsilon])\otimes_{k[\epsilon]}k\cong R\) follows
+ from standard commutative algebra.) We will say that a deformation is
+ \textit{trivial} if it is equivalent to the trivial deformation, and
+ \textit{non-trivial} otherwise. 
+
+\subsubsection{Abstract deformations can be realised in an ambient scheme} 
+If we have a surjection \(S\twoheadrightarrow R\), each associated embedded
+deformation \(S[\epsilon]\twoheadrightarrow \wt{R}\) gives rise to an abstract
+deformation \(\wt{R}\) of \(R\). In fact for a sufficiently large ambient
+scheme, all abstract deformations can be realised as embedded deformations in this way.
+
+\begin{proposition}\label{all-defs-are-embedded}
+    There is a \(k\)-algebra surjection \(S\twoheadrightarrow R\) such that
+    whenever \(\beta:\wt{R}\rightarrow R\) is an abstract deformation of \(R\),
+    there is a commutative diagram 
+    \[\begin{tikzcd}
+        S[\epsilon] \arrow[r, "\epsilon \mapsto 0"] \arrow[d] & S \arrow[d]  \\
+        \wt{R} \arrow[r, "\beta"] & R
+    \end{tikzcd}\]
+    where all the maps are surjections. In particular,
+    \(S[\epsilon]\twoheadrightarrow \wt{R}\) is an embedded deformation of
+    \(S\twoheadrightarrow R\).
+    \begin{proof}
+        Let \(S\) be any polynomial algebra \(k[x_i]\) (in possibly infinitely
+        many variables) that surjects onto \(R\).
+        Abusing notation, we will write \(x_i\) for the image of \(x_i\) in
+        \(R\).  
+
+        For each $i$, we can choose a lift $y_i\in\wt{R}$ of $x_i\in R$. Since
+        \(S[\epsilon]\) is a free \(k[\epsilon]\)-algebra, we get a map
+        \(S[\epsilon]\rightarrow \wt{R}\) sending \(x_i\mapsto y_i\). It remains
+        to show this is a surjection-- this follows from the weak five lemma applied
+        to the commutative diagram below with exact rows.         
+        \[\begin{tikzcd}
+            0 \arrow[r]& S \arrow[r,"\epsilon"] \arrow[d, two heads] & S[\epsilon] \arrow[r]
+            \arrow[d] & S \arrow[r] \arrow[d, two heads] & 0 \\
+            0 \arrow[r]& R \arrow[r, "\epsilon"] & \wt{R} \arrow[r] & R \arrow[r] & 0.
+        \end{tikzcd}\] 
+        (Surjectivity of the peripheral arrows implies surjectivity of the middle arrow).
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+There is no canonical embedded deformation inducing a given abstract
+deformation, as we had to make a choice of lift of $x_i\in R$ to $y_i\in\wt{R}$.
+A different choice of lift, say $y_i'$, would also give an embedded deformation
+$S[\epsilon]\to\wt{R}$ sending $x_i\mapsto y_i'$. But using the exact sequence 
+\[\begin{tikzcd} 
+    0 & R & \wt{R} & R & 0
+    \arrow[from=1-1, to=1-2]
+    \arrow["\cdot\epsilon", from=1-2, to=1-3]
+    \arrow[from=1-3, to=1-4]
+    \arrow["", from=1-4, to=1-5]
+\end{tikzcd}\]
+we deduce that for every $i$ there exists a unique $z_i\in R$ such that
+$y_i'=y_i+\epsilon z_i$. Thus, for any two surjections
+$\phi,\phi':S[\epsilon]\to\wt{R}$, there is a unique $k[\epsilon]$-algebra
+automorphism \(\alpha:\wt{R}\rightarrow \wt{R}\) sending \(y_i\mapsto y_i +
+\epsilon z_i\) such that such that $\phi'=\alpha\circ\phi$.
+\end{remark}
+
+\subsubsection{Classification of abstract deformations} 
+In light of \Cref{all-defs-are-embedded}, to classify abstract deformations of
+\(R\) it suffices to find a polynomial algebra \(S\) that surjects onto \(R\)
+and then determine which embedded deformations of \(S\twoheadrightarrow R\) are
+equivalent as abstract deformations. We shall prove that two embedded
+deformations given by \(\phi,\phi'\in \Hom_S(I,R)\) are equivalent if and only
+if the difference \(\phi-\phi'\) is induced by a \(k\)-derivation \(S\rightarrow
+R\) in the sense that we define below.
+
+\begin{definition} 
+    For a \(k\)-algebra \(S\) and an \(S\)-module $M$, a 
+    \textit{$k$-derivation} from $S$ into $M$ is a \(k\)-linear map $\delta:S\to
+    M$ which satifies the Leibniz rule-- for all $s,s'\in S$,
+    \[\delta(ss')=s\delta(s')+s'\delta(s).\] 
+    Write \(\text{Der}_k(S,M)\) for the space of \(k\)-derivations from \(S\)
+    into \(M\), this is naturally an \(S\)-module.
+\end{definition}
+
+In our case, the surjection \(S\rightarrow R= S/I\) induces a natural
+\(S\)-module structure on \(R\). Then we can check that the restriction of a
+\(k\)-derivation \(\delta:S\rightarrow R\) to \(I\subset S\) is an element of
+\(\Hom_S(I,R)\), thus inducing an embedded deformation by \Cref{embdef}. In
+fact, we show that these are precisely those embedded deformations that are
+trivial as abstract deformations.
+
+\begin{theorem} \label{isom classes} 
+    If \(R\cong S/I\) as \(k\)-algebras, then for any
+    $\phi,\phi'\in\Hom_{S}({I},{R})$ the corresponding embedded deformations are
+    equivalent if and only if $\phi'-\phi$ is the restriction of a
+    $k$-derivation \(S\rightarrow R\).  
+
+    \begin{proof} 
+        Write \(I_\phi, I_{\phi'}\subset S[\epsilon]\) for the ideals of
+        embedded deformations corresponding to \(\phi, \phi'\) respectively. 
+
+        Suppose $\delta:S\rightarrow R$ is a $k$-derivation such that
+        \(\phi'(x)-\phi(x)=\delta(x)\) for all \(x\in I\). Then define a map
+        \begin{align*} 
+            S[\epsilon] &\longrightarrow \wt{R}' \\ x+\epsilon y &\longmapsto x
+            + \epsilon y + \epsilon \cdot \delta(x) \mod I_{\phi'}
+        \end{align*}
+        where we note that \(\epsilon\cdot \delta(x)\) is the image of
+        \(\delta(x)\in R\) in the injection \(R\xrightarrow{\epsilon} \wt{R}'\).
+        It is clear that this is a homomorphism of \(k\)-algebras, and
+        \(I_\phi\) lies in the kernel since the elements of \(I_\phi\) are of
+        the form \(x+y\epsilon \in I_\phi\) where \(x\in I\) and \(\phi(x)=y
+        \mod I\). Thus we have an induced homomorphism  \(\alpha: \wt{R}\rightarrow
+        \wt{R}'\). Moreover, it is clear from the construction that the functor
+        \(-\otimes_{k[\epsilon]}k\) (which essentially sets \(\epsilon = 0\))
+        sends \(\alpha\) to \(\text{Id}_k\), thus \(\wt{R}\) and \(\wt{R}'\) are
+        equivalent as abstract deformations.
+
+        Conversely, suppose we have an equivalence of deformations
+        $\alpha:\wt{R}\to \wt{R}'$, then consider the maps
+        \[\begin{tikzcd}[row sep = tiny] 
+            S[\epsilon]\arrow[r,"\pi", two heads] & \wt{R} \arrow[r,"\alpha"] &
+            \wt{R}', S[\epsilon]\arrow[rr,"\pi'", two heads] & & \wt{R}'.
+        \end{tikzcd}\] 
+        These agree upon applying the functor \(-\otimes_{k[\epsilon]} k\), so
+        the image of the difference \((\pi\circ \alpha-\pi')\) must lie in
+        \(\epsilon R \subset \wt{R}'\). Thus we can define the composite map
+        \[\delta :\quad S \xrightarrow{\;1\mapsto 1\;} S[\epsilon]
+            \xrightarrow{\;\alpha \circ \pi - \pi'\;} \epsilon R
+            \xrightarrow{\;\epsilon \mapsto 1\;} R.\]
+        It can be checked that this is a \(k\)-derivation. For \(x\in
+        I\) we have \(\pi(x) +\epsilon \phi(x) =0\) by construction of
+        the ideal \(I_\phi\), and likewise \(\pi'(x) + \epsilon \phi'(x) = 0\).
+        Moreover, \(\alpha(\epsilon \phi(x)) = \epsilon \phi(x)\), so \(\delta =
+        \phi'-\phi\) as required.
+    \end{proof}
+\end{theorem}
+
+Given a \(k\)-algebra \(R\), choose a surjection \(S\twoheadrightarrow R\) with
+kernel \(I\) such that \(S\) is a polynomial algebra. Note any \(R\)-module
+\(M\) has a naturally induced \(S\)-module structure, and the ideal \(I\) lies
+in the annihilator of \(M\). Then a \(k\)-derivation
+\(\delta:S\rightarrow M\) restricts to a homomorphism \(I\rightarrow M\) since 
+\[\delta(s\cdot i) = s\cdot \delta(i) + i\cdot \delta(s) = s\cdot \delta(i)\]
+whenever \(s\in S\), \(i\in I\). We define the \(R\)-module \(T^1(R/k,M)\) as
+the cokernel of the map \(\text{Der}_k(S,M)\to\Hom_{S}(I,M)\) given by
+restriction, and write \(T^1_{R/k}\) for \(T^1(R/k,R)\).
+
+Then the result below follows from \Cref{all-defs-are-embedded} and \Cref{isom
+classes}.
+
+\begin{corollary} 
+    There is a natural one-to-one correspondence between equivalence
+    classes of abstract deformations of $R$ and $T^1_{R/k}$.  
+\end{corollary}
+
+\begin{remark}
+    A priori there is no reason to believe that \(T^1(R/k,M)\) is independent of
+    the chosen embedding \(S\twoheadrightarrow R\). But since it turns out to be
+    naturally in bijection with the set of abstract deformations of \(R\), it is
+    indeed independent of \(S\). In fact, \(T^1\) is a functor which can be
+    defined in a more general setting without making choices \cite[see for
+    instance][]{hartshorne_deformation_2010}. 
+\end{remark}
+
+\subsection{Geometric examples}
+If \(S\) is a polynomial algebra surjecting onto \(R\), then we showed how the
+elements of \(\Hom_S(I,R)\) naturally correspond to global sections of the
+normal sheaf of the inclusion \(\Spec R \hookrightarrow \Spec S \), and thus
+deformations of \(\Spec R\) come from perturbing it in normal directions in a
+sufficiently large ambient scheme. Which of these are trivial?  
+
+Recall that the module of K\"ahler differentials \(\Omega_{S/k}\) gives the
+global sections of the cotangent sheaf on \(\Spec(S)\), and is generated
+over \(S\) by all formal symbols \(\{ds\;|\; s\in S\}\). The map \(d:
+S\rightarrow \Omega_{S/k}\) given by \(s\mapsto ds\) is a derivation, and is
+universal in the sense that for any \(S\)-module \(M\), all \(k\)-derivations
+\(S\rightarrow M\) must factor through \(d\) giving a natural isomorphism
+\(\Hom_S(\Omega_{S/k}, M) \cong \text{Der}_k(S,M)\). In particular, elements of 
+\(\text{Der}_k(S,S)\) are precisely the global sections of the tangent sheaf
+(i.e.\ vector fields) on \(\Spec(S)\).
+
+When \(S\) is a polynomial algebra and \(R\cong S/I\), the module
+\(\Omega_{S/k}\) is free over \(S\) \cite[Corollary 16.1]{eisen} and hence we
+have the exact sequence 
+\[0\rightarrow \text{Der}_k(S,I) \rightarrow \text{Der}_k(S,S) \rightarrow
+\text{Der}(S,R) \rightarrow 0.\]
+Geometrically, this says that \(k\)-derivations \(\delta:S\to R\) are given by 
+vector fields on \(\Spec S\) up to fields which vanish on \(\Spec R\) (which
+naturally give sections of the normal sheaf). The induced embedded deformation
+perturbs \(\Spec R\) along this vector field while preserving the inherent
+geometry, thus giving a trivial abstract deformation.
+
+\begin{example}[Zero dimensional schemes]
+    Consider $S=k[x]$ and $R=k[x]/(x)$, i.e.\ the inclusion of the origin in
+    $\mathbb{A}^1_k$. We have that \(\text{Der}_k(S,R)\) is a one dimensional
+    vector space with basis \({\partial}{\partial x}\), and the embedded
+    deformation corresponding to the vector field \(a\frac{\partial}{\partial
+    x}\) is \(k[\epsilon,x]/(x+a\epsilon)\) which `translates the point with
+    speed \(a\)'. In this case the normal bundle (i.e.\ the tangent space to
+    \(\mathbb{A}^1_k\) at the origin) has rank \(1\) and thus every embedded
+    deformation of \(\Spec R \hookrightarrow \Spec S\) is of the form above,
+    showing that \(\Spec R\) has no non-trivial abstract deformations. We say
+    that \(\Spec R\) is \textit{infinitesimally rigid}. 
+
+    Consider instead the ordinary double point coming from \(R= k[x]/(x^2)\),
+    with the natural surjection from \(S=k[x]\). A \(k\)-derivation
+    \(\delta:S\rightarrow R\) given by \(\delta x = ax+b\in R\) must have
+    \(\delta(x^2) = 2bx\) and hence the induced deformation is given by the
+    ideal \((x^2-2bx\epsilon) = (x-b\epsilon)^2\). This is the trivial
+    deformation corresponding to translation along the vector field
+    \(b\frac{\partial}{\partial x}\). Note however that \(\Hom_S(I,R)\) is a two
+    dimensional vector space, hence an embedded deformation is given by an ideal
+    \((x^2-2bx\epsilon + c\epsilon)\subset k[\epsilon, x]\) for \(b,c\in k\).
+    Thus we have a one-dimensional family of nontrivial abstract deformations
+    \[T^1_{R/k} = \left\{\frac{k[\epsilon,x]}{(x^2-c\epsilon)}\;\mid\; c\in
+    k\right\} \] which can be seen as separating the double point into two
+    points moving away.  
+
+    The discussion above readily applies to the setting of \Cref{n points}--
+    suppose we have a set of \(p\) zero-dimensional subschemes, the \(i\)th one
+    having multiplicity \(m_i\). This can be realised as the vanishing locus of
+    a degree \(n=\sum_i m_i\) polynomial \(f=\prod_{i}(x-\lambda_i)^{m_i}\in
+    k[x]\) for \(\lambda_i\in k\) distinct. We saw that this embedding admits an
+    \(n\)-dimensional deformation space parametrised by polynomials of degree at
+    most \(n-1\). We should expect the trivial deformations to form a \(p\)
+    dimensional subspace coming from translating the `clusters' without changing
+    multiplicity. This is indeed the case-- note that
+    \[h:=\text{gcd}\left(f,\frac{\partial f}{\partial
+    x}\right)=\prod_{i=1}^p(x-\lambda_i)^{m_i-1}\] is a degree \(n-p\)
+    polynomial, and by B\'ezout's lemma there exist $\alpha,\beta\in k[x]$ with
+    \(h=\alpha f+\beta\frac{\partial f}{\partial x}.\) 
+
+    Given an embedded deformation \((f+\epsilon g)\subset k[x,\epsilon]\), we
+    can write \(g=q\cdot h + r\) for a polynomial \(r\in k[x]\) with
+    \(\text{deg}(r)<\text{deg}(h)\). Thus we have \[g-r = qh \equiv q\beta
+        \frac{\partial f}{\partial x} \pmod{f},\] i.e.\ the deformations
+        \((f+\epsilon g)\) and \((f+\epsilon r)\) differ by a trivial
+        deformation induced by the derivation \(q\beta \frac{\partial}{\partial
+        x}\). Moreover, in this case the map \((f)\to R\) given by \(f\mapsto
+        r\pmod f\) is a derivation if and only if \(r=0\), by degree
+        considerations. Thus we have a complete description of the equivalence
+        classes of deformations of \(\Spec k[x]/(f)\) as \[T^1_{R/k} =
+        \left\{\frac{k[\epsilon,x]}{f+\epsilon r}\;|\; \text{deg}(r)<n-p\right\}
+    \cong k^{n-p}.\]
+\end{example}
+
+\begin{example}[Coordinate axes]
+    Consider the ring \(R=k[x,y]/(xy)\). The natural surjection from \(S =
+    k[x,y]\) gives an embedding of \(\Spec R\) as the coordinate axes in
+    \(\mathbb{A}^2_k\). Then it is clear that embedded deformations of \(\Spec
+    R\) are given by ideals \((xy+\epsilon(a+xp(x)+yq(y)))\subset
+    k[x,y,\epsilon]\) for polynomials \(p,q\) in \(x,y\) respectively. The map 
+    \begin{align*}
+        \frac{k[x,y,\epsilon]}{(xy+a\epsilon)}&\rightarrow
+        \frac{k[x,y,\epsilon]}{(xy+(a+xp(x)+yq(y))\epsilon)} \\ 
+        x &\mapsto x+\epsilon q(y) \\ 
+        y &\mapsto y+\epsilon p(x)
+    \end{align*}
+    is easily seen to be an isomorphism of abstract deformations, induced by the
+    derivation \(\delta:=q(y)\frac{\partial}{\partial
+    x}+p(x)\frac{\partial}{\partial y}\). Moreover for distinct $a,a'\in k$, the
+    corresponding deformations can't be equivalent because there is no way to
+    differentiate $xy$ and get $a-a'$. Hence the space of abstract deformations
+    is one dimensional, given by the family of conics 
+    \[ T^1_{R/k} = \left\{\frac{k[\epsilon,x,y]}{(xy+\epsilon a)} \;\mid \; a\in
+    k \right\}.\] 
+\end{example}
+
+\begin{example}[Smoothening of hypersurfaces]
+    Generalising the above example, consider \(S=k[x_1,...,x_n]\) with a
+    principal ideal \(I=(f)\). Then \(R=S/I\) is the coordinate ring of a
+    hypersurface, and the embedded deformations of \(\Spec R\) are given by
+    \(\Hom_S(I,R)\cong R\). To characterise trivial deformations, note
+    \(\Omega_{S/k} =\bigoplus_{i=1}^n S\cdot dx_i\) is free and hence
+    \(k\)-derivations \(S\rightarrow R\) are of the form \(\sum_{i=1}^n g_i
+    \frac{\partial}{\partial x_i}\) for \(g_i\in R\). Thus the set of trivial
+    deformations is precisely the \textit{Jacobian ideal}
+    \[
+        \left\{\sum_{i=1}^n \frac{\partial f}{\partial x_i}g_i \;|\; g_i \in R
+        \right\} =
+        \left(\frac{\partial f}{\partial x_1},..., \frac{\partial f}{\partial
+        x_n}\right) =: (\nabla f)\subset R.
+    \]
+    It follows that the abstract deformations of \(\Spec R\) are given by 
+    \[T^1_{R/k}=\frac{R}{(\nabla f)} \cong \frac{S}{(f,\nabla f)} \]
+    which can be recognised as the coordinate ring of the singular locus of
+    \(\Spec R\), often called the \textit{Tjurina algebra} of the hypersurface. 
+
+    \end{example}
+
+\subsubsection{Rigidity of smooth affine varieties} 
+The example above shows smooth hypersurfaces are infinitesimally rigid. We shall
+see in fact that this characterises smooth affine varieties.  
+
+Suppose \(\Spec R\) is an irreducible affine scheme of finite type embedded in
+\(\mathbb{A}^n_k\) via a surjection from \(S=k[x_1,...,x_n]\) with kernel \(I\).
+Since $\mathbb{A}^n_k$ is non-singular, we see from \cite[Theorem 8.17]{harts} that
+\(\Spec R\) is non-singular if and only if \(\Omega_{R/k}\) is a locally free
+\(R\)-module, and the map \(\alpha\) in the conormal sequence
+\[I/I^2\overset{\alpha}{\longrightarrow}
+\Omega_{S/k}\otimes_SR\to\Omega_{R/k}\longrightarrow 0\] 
+is injective. We will see that the functor \(T^1\) provides a
+cohomology which measures the failure of the conormal sequence to be left
+exact-- in particular detecting if \(\Spec R\) is non-singular.
+
+\begin{proposition}
+    For any \(R\)-module \(M\) there is an exact sequence given by
+    \[\Hom_R(\Omega_{S/k}\otimes_S R,M)\rightarrow \Hom_R(I/I^2,M) \rightarrow
+    T^1(R/k,M)\rightarrow 0.\]
+    \begin{proof}
+        By the \(\otimes-\Hom\) adjunction, we have natural isomorphisms
+        \[\Hom_R(\Omega_{S/k}\otimes_S R, M) \cong
+        \Hom_S(\Omega_{S/k},\Hom_R(R,M))\cong\text{Der}_k(S,M)\]  
+        where the second isomorphism follows from the definition of
+        \(\Omega_{S/k}\) and the fact that \(\Hom_R(R,-)\) is the identity
+        functor.  Likewise, we have 
+        \[\Hom_R(I/I^2,M)\cong \Hom_S(I/I^2, M)\cong \Hom_S(I,M)\] 
+        since \(I\) lies in the annihilator of both \(M\) and \(I/I^2\). It can
+        be checked then that the map induced by \(\alpha\) is then simply given
+        by restricting the derivation, so that the result follows.
+    \end{proof}
+\end{proposition}
+
+\begin{theorem} 
+    Let $X=\Spec R$ be an irreducible affine scheme of finite type over $k$.
+    Then $X$ is non-singular if and only if $T^1({R/k},M)=0$ for all $R$-modules
+    $M$, in which case it has no non-trivial deformations.  
+
+    \begin{proof} 
+        Since \(\Omega_{R/k}\) is finitely presented, it is locally free if and
+        only if it is projective. From the discussion above, it follows that
+        \(X\) is non-singular if and only  if the sequence below splits: 
+        \[0\rightarrow I/I^2\xrightarrow{\alpha}
+        \Omega_{S/k}\otimes_SR\to\Omega_{R/k}\rightarrow 0.\]
+
+        Now if the sequence splits and \(M\) is an \(R\)-module, then the
+        sequence remains split-exact after applying the functor \(\Hom_S(-,M)\)
+        and hence \(T^1(R/k,M)=0\). 
+
+        Conversely if \(T^1(R/k,M)=0\) for all \(R\)-modules \(M\), then
+        choosing \(M=I/I^2\) we see that 
+        \[\Hom_R(\Omega_{S/k}\otimes_S R, I/I^2) \rightarrow
+        \Hom_R(I/I^2,I/I^2)\] 
+        is surjective, so there exists a \(\beta: \Omega_{S/k}\otimes_SR
+        \rightarrow I/I^2\) such that \(\beta\circ\alpha=\text{Id}_{I/I^2}\).
+        This gives a splitting of the sequence.  
+    \end{proof}
+\end{theorem}

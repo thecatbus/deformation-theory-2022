@@ -1,0 +1,85 @@
+\section{Introduction}
+Deformation theory is a ubiquitous part of modern algebra and geometry, and is
+concerned with studying infinitesimal neighbourhoods of algebro-geometric
+objects in families that they sit in. The goal of this exposition is to provide
+an accessible introduction to various facets of the subject with sufficiently
+verbose examples, without pursuing any direction in great depth. 
+
+We begin by making the notion of a deformation problem precise in
+\Cref{section-whats-a-deformation}. Broadly speaking, this will be a functor
+that takes a base scheme and gives all deformation families of the object in
+concern parametrised over that base. Studying all families over a fixed 
+base is a worthy pursuit in its own right-- many theorems in algebraic geometry
+are proven by showing an object in concern can be deformed into something
+degenerate, which is hence easier to handle. One such result is Mori's theorem
+on existence of rational curves in Fano varieties
+\cite[a treatment of this result can be found in ][Section
+10.1]{matsukiIntroductionMoriProgram2002}. In \Cref{section-affine-deformation}
+we compute such deformation families over the base \(\Spec
+k[\epsilon]/(\epsilon^2)\) as explicitly as possible. In particular, we show
+that smooth affine varieties are characterised by their deformation families
+over this base.
+
+In \Cref{section-dmodules}, we show that the space of differential operators on a
+complex variety is naturally a deformation of its cotangent bundle. This is the
+starting point for a rich theory of \(D\)-modules, which allow us to talk about
+systems of differential equations on algebraic varieties.
+
+In addition to studying individual deformation families over a specified base, we
+can also study properties of the deformation functor itself. For instance, the
+(pro) representing object for a deformation functor, if it exists, is uniquely
+defined and contains most of the information about the deformation problem at
+hand. By associating an appropriate deformation problem to a system, modern
+geometers are able to extract important invariants-- for instance,
+Donovan-Wemyss's \emph{contraction algebras} pro-represent a deformation functor
+associated to compoint du-Val singularities and capture most of the homological
+information about the singularity and its resolutions
+\cite[Section 5]{wemyssAspectsHomologicalMinimal}. 
+
+In classical deformation theory (with commutative test objects), a theorem
+of Schlessinger characterises when the deformation functor is (pro) representable
+\cite[the result is discussed in][Section 16]{hartshorne_deformation_2010}. One
+such example is the deformation functor associated to a point \(p\) in a variety
+\(X=\Spec A\). As one might expect it is possible to recover the local geometry
+of the variety near \(p\) entirely from the associated deformation theory, and
+we show that completed local ring \(\widehat{A}_p\) pro-represents the
+deformation functor. In \Cref{section-noncommutative-def}, we exhibit how
+extending the deformation functor to non-commutative test objects makes a
+similar result hold even for non-commutative algebras \(A\), despite the loss of
+a geometric picture. 
+
+By introducing Deligne's philosophy of associating deformation functors to
+differentially graded lie algebras and \(A_\infty\)-algebras, we reprove Ed
+Segal's result which uses deformation theory to derive a finite presentation for
+the non-commutative completion \(\widehat{A}_p\). 
+
+\subsubsection{Prerequisites and conventions} We assume familiarity with basic
+algebraic geometry and commutative algebra--  at the level of a first course in
+scheme theory \cite[such as][chapter II]{harts} should be more than sufficient.
+Likewise, elementary notions in category theory and homological algebra are
+freely used. Parts of the exposition mention symplectic geometry and theory of
+differential equations, but not much will be lost if the reader has not seen
+these.
+
+Unless otherwise specified, we work with an algebraically closed field \(k\) of
+characteristic zero (although neither of these assumptions might be strictly
+necessary), and nothing will be lost by assuming \(k=\mathbb{C}\). A variety is
+an integral separated scheme of finite type over \(k\).  We do not make any
+distinction between a locally free sheaf and the total space of the
+corresponding vector bundle.
+
+\subsubsection{Acknowledgements} This exposition was written as a group project
+for the Glasgow-Maxwell School (GLaMS), and we thank our supervisors Ivan
+Cheltsov, Michael Wemyss, and David Jordan for encouraging us to pursue this
+topic. The second author also thanks Matt Booth for helpful conversations. 
+
+We make no claim to originality, and while we have made an attempt to provide
+references throughout the text, we mention here the most helpful resources
+used-- \cite{szendroi_unbearable_1999, hartshorne_deformation_2010,
+belmans_hochschild_2018} for classical deformation
+theory of algebras and schemes, \cite{bellamy2016noncommutative, hotta2007d,
+ginzburg1998lectures, okitaniIntroductionDmodules2022} for D-modules,
+\cite{august_differentially_2015} for differentially graded (lie) algebras and
+their relation to deformation theory, and \cite{eriksen_noncommutative_2017,
+eriksenComputingNoncommutativeDeformations2014, segal__2008} for non-commutative
+deformation theory.

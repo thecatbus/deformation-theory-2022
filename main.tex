@@ -1,0 +1,46 @@
+\documentclass[10pt]{article}
+\input{tex-template/packages}
+\input{tex-template/configuration}
+\input{tex-template/alg-geo}
+
+\pgfplotsset{compat=1.18}
+
+\usepackage{authblk}
+\renewcommand\Affilfont{\itshape\small}
+
+\addbibresource{bibliography.bib}
+
+\renewcommand{\deg}[1]{\text{deg}(#1)}
+\renewcommand{\t}[1]{\tilde{#1}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\id}[1]{\text{id}_{#1}}
+
+\setcounter{section}{-1}
+
+\begin{document}
+
+\title{\Huge{Invitation to Deformation Theory}}
+\author[1]{Joseph Malbon}
+\author[2]{Parth Shimpi}
+\author[3]{Dominika Zuzanna Zieba}
+
+\affil[1,3]{University of Edinburgh}
+\affil[2]{University of Glasgow}
+
+\date{}
+
+\maketitle
+
+\tableofcontents
+
+\vspace{1em}
+
+\input{introduction.tex}
+\input{sections/what-is-a-deformation.tex}
+\input{sections/deformations-of-algebras.tex}
+\input{sections/d-modules.tex}
+\input{sections/noncommutative-defs.tex}
+
+\printbibliography
+
+\end{document}
